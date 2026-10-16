@@ -1,3 +1,5 @@
+import random
+
 class CharacterClasses:
 
     def __init__ (self, type: str, attack_power: float, health : float,):
@@ -45,9 +47,27 @@ class Styles:
 
     """
 
+class adventure:
+    def continue_forward():
+                
+            encounters = ["chest", "enemy", "hall", "hall"]
+    
+            encounter = random.choice(encounters)
+            if encounter == "hall":
+                input("As you go deeper into the dungeon you notice something!")
+                print("More walls..")
+    
+            if encounter == "chest":
+                input("As you go deeper into the dungeon you notice something!")
+                print("You see a chest")
+    
+            if encounter == "enemy":
+                print("You encounter an enemy")
 
 def main():
-    
+
+
+    character_health = 0
     maincharacter = [
                 CharacterClasses("Mage", 5, 30), #elf
                 CharacterClasses("Warrior", 3, 40), # warrior
@@ -62,18 +82,50 @@ def main():
 
     input("Press ENTER to start dungeon decent!")
 
-   
     
+    
+    chracter_selection_page = True
 
-    race_selection = input("Please Select your Character type - (Mage, Warrior, Assassin): " ).lower()
-    if race_selection == 'mage':
-        print(CharacterClasses.get_summary(maincharacter[0]))
+    while chracter_selection_page == True:
+        race_selection = input("Please Select your Character type - (Mage, Warrior, Assassin): " ).lower()
+        
+        if race_selection == 'mage':
+            print(CharacterClasses.get_summary(maincharacter[0]))
+            chracter_selection_page = False
+            character_health = maincharacter[0].health
+            
+            print(f"You current health is {character_health}")
+            
+        elif race_selection == 'warrior':
+            print(CharacterClasses.get_summary(maincharacter[1]))
+            chracter_selection_page = False
+            character_health = maincharacter[1].health
+                        
+            print(f"You current health is {character_health}")
 
-    elif race_selection == 'warrior':
-        print(CharacterClasses.get_summary(maincharacter[1]))
+        elif race_selection == 'assassin':
+            print(CharacterClasses.get_summary(maincharacter[2]))
+            chracter_selection_page = False
+            character_health = maincharacter[2].health
+                        
+            print(f"You current health is {character_health}")
 
-    elif race_selection == 'assassin':
-        print(CharacterClasses.get_summary(maincharacter[2]))
+        else:
+            print("Wrong input!!")
+
+
+    input("You enter the dungeon")
+    input("Theres a chill in the air")
+    input("You feel on edge")
+
+    print(adventure.continue_forward())
+
+    
+    
+            
+
+
+    
 
 
 
