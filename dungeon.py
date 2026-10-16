@@ -16,9 +16,25 @@ class CharacterClasses:
     def character_miss(self):
         return f"Your character missed :("
 
+    maincharacter = [
+                    ("Mage", 5, 30), #mage health 30, atk pwer 5
+                    ("Warrior", 4, 40), #warrior health 40, atk pwer 4
+                    ("Assassin", 6, 25) # assassin health 25, atk pwr 6
+        
+                ]
+
+class EnemyClasses:
+    def __init__(self, type: str, attack_power: float, health: float):
+        self.type = type
+        self.attack_power = attack_power
+        self.health = health
+
+    
+
+
 class Styles:
     front_page = """
-    s
+    
 ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⡀⠀⠀⠀⠀⠀⠀⢀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
 ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠄⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
 ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠃⠀⠀⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
@@ -50,9 +66,9 @@ class Styles:
 class adventure:
     def continue_forward():
                 
-            encounters = ["chest", "enemy", "hall", "hall"]
+            encounters = ["chest", "enemy", "hall"]
     
-            encounter = random.choice(encounters)
+            encounter = random.choices(encounters, weights=[2, 1, 4], k = 1)[0]
             if encounter == "hall":
                 input("As you go deeper into the dungeon you notice something!")
                 print("More walls..")
@@ -63,17 +79,26 @@ class adventure:
     
             if encounter == "enemy":
                 print("You encounter an enemy")
+                
 
 def main():
 
 
     character_health = 0
+
     maincharacter = [
                 CharacterClasses("Mage", 5, 30), #elf
                 CharacterClasses("Warrior", 3, 40), # warrior
                 CharacterClasses("Assassin", 6, 25) #assassin
     
             ]
+
+    enemies = [
+            ("Goblin", 3, 10)
+            ("Orc", 5, 20)
+        ]
+
+    
 
     print("-------------------------------------------------------------")
     print("               Welcome to RogueLite PYTHON ver.               ")
