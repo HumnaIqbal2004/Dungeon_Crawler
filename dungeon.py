@@ -29,6 +29,11 @@ class EnemyClasses:
         self.attack_power = attack_power
         self.health = health
 
+    def enemy_attack_prepare(self):
+        return f"{self.type} prepares for an attack"
+
+    def enemy_attack(self):
+        return f"{self.type} attacks. You take {self.attack_power} of damage!"
     
 
 
