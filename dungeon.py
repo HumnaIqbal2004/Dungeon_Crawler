@@ -16,18 +16,16 @@ class CharacterClasses:
     def character_miss(self):
         return f"Your character missed :("
 
-    maincharacter = [
-                    ("Mage", 5, 30), #mage health 30, atk pwer 5
-                    ("Warrior", 4, 40), #warrior health 40, atk pwer 4
-                    ("Assassin", 6, 25) # assassin health 25, atk pwr 6
-        
-                ]
+    
 
 class EnemyClasses:
     def __init__(self, type: str, attack_power: float, health: float):
         self.type = type
         self.attack_power = attack_power
         self.health = health
+
+    def enemy_summary(self):
+        return f"You encountered a {self.type}, It has {self.health} hp!"
 
     def enemy_attack_prepare(self):
         return f"{self.type} prepares for an attack"
@@ -84,7 +82,22 @@ class adventure:
     
             if encounter == "enemy":
                 print("You encounter an enemy")
-                
+                enemy_fight_start()
+
+def enemy_fight_start():
+    enemies = [
+                EnemyClasses("Goblin", 3, 10),
+                EnemyClasses("Orc", 5, 20)
+            ]
+
+    which_enemies = ["Goblin", "Orc"]
+    which_enemy = random.choices(which_enemies, weights=[3, 1], k = 1)[0]
+
+    if which_enemy == "Goblin":
+        print(EnemyClasses.enemy_summary(enemies[0]))
+
+    elif which_enemy == "Orc":
+        print(EnemyClasses.enemy_summary(enemies[1]))
 
 def main():
 
@@ -97,12 +110,6 @@ def main():
                 CharacterClasses("Assassin", 6, 25) #assassin
     
             ]
-
-    enemies = [
-            ("Goblin", 3, 10)
-            ("Orc", 5, 20)
-        ]
-
     
 
     print("-------------------------------------------------------------")
@@ -143,12 +150,15 @@ def main():
         else:
             print("Wrong input!!")
 
+    while character_health > 0:
 
-    input("You enter the dungeon")
-    input("Theres a chill in the air")
-    input("You feel on edge")
+        input("You enter the dungeon")
+        input("Theres a chill in the air")
+        input("You feel on edge")
 
-    print(adventure.continue_forward())
+        print(adventure.continue_forward())
+
+    
 
     
     
