@@ -101,7 +101,7 @@ def enemy_fight_start(hero):
     
 
     character_land_chances = ["hits", "misses"]
-    character_land_goblin = random.choices(character_land_chances, weights = [3, 1], k = 1)[0]
+    character_land_enemy = random.choices(character_land_chances, weights = [3, 1], k = 1)[0]
 
     enemy_land_chances = ["hits", "misses"]
     enemy_land_hero = random.choices(enemy_land_chances, weights=[1, 2], k = 1)[0]
@@ -116,7 +116,7 @@ def enemy_fight_start(hero):
 
         while hero.health > 0 and goblin.health > 0:
 
-            if character_land_goblin == "hits":
+            if character_land_enemy == "hits":
                 input(f"You hit goblin for {hero.attack_power} points of damage")
                 goblin.health = goblin.health - hero.attack_power
                 input(f"Goblin has {goblin.health}hp!")
@@ -125,7 +125,7 @@ def enemy_fight_start(hero):
                     break
 
                 character_land_chances = ["hits", "misses"]
-                character_land_goblin = random.choices(character_land_chances, weights = [3, 1], k = 1)[0]
+                character_land_enemy = random.choices(character_land_chances, weights = [3, 1], k = 1)[0]
                 
 
                 if enemy_land_hero == "hits":
@@ -148,7 +148,7 @@ def enemy_fight_start(hero):
             else:
                 input(f"You miss")
                 character_land_chances = ["hits", "misses"]
-                character_land_goblin = random.choices(character_land_chances, weights = [3, 1], k = 1)[0]
+                character_land_enemy = random.choices(character_land_chances, weights = [3, 1], k = 1)[0]
 
                 if enemy_land_hero == "hits":
                     input(f"Goblin hits you for {goblin.attack_power} points of damage")
@@ -166,8 +166,61 @@ def enemy_fight_start(hero):
 
     elif which_enemy == "Orc":
         print(EnemyClasses.enemy_summary(enemies[1]))
+        Orc = enemies[1]
+        
+        
+        while hero.health > 0 and Orc.health > 0:
+        
+            if character_land_enemy == "hits":
+                input(f"You hit Orc for {hero.attack_power} points of damage")
+                Orc.health = Orc.health - hero.attack_power
+                input(f"Orc has {Orc.health}hp!")
+                if Orc.health <= 0:
+                    print("Orc faints")
+                    break
+        
+                character_land_chances = ["hits", "misses"]
+                character_land_enemy = random.choices(character_land_chances, weights = [3, 1], k = 1)[0]
+                        
+        
+                if enemy_land_hero == "hits":
+                    input(f"Orc hits you for {Orc.attack_power} points of damage")
+                    hero.health = hero.health - Orc.attack_power
+                    input(f"Your {hero.type} currently has {hero.health}hp")
+                    if hero.health <= 0:
+                    #ADD A DIED FUNCTION
+                        break
+        
+                    enemy_land_chances = ["hits", "misses"]
+                    enemy_land_hero = random.choices(enemy_land_chances, weights=[1, 2], k = 1)[0]
+        
+                else:
+                    input("Orc misses its attack")
+        
+                    enemy_land_chances = ["hits", "misses"]
+                    enemy_land_hero = random.choices(enemy_land_chances, weights=[1, 2], k = 1)[0]
+        
+            else:
+                input(f"You miss")
+                character_land_chances = ["hits", "misses"]
+                character_land_enemy = random.choices(character_land_chances, weights = [3, 1], k = 1)[0]
+        
+                if enemy_land_hero == "hits":
+                    input(f"Orc hits you for {Orc.attack_power} points of damage")
+                    hero.health = hero.health - Orc.attack_power
+                    input(f"Your {hero.type} currently has {hero.health}hp")
+                        
+                    enemy_land_chances = ["hits", "misses"]
+                    enemy_land_hero = random.choices(enemy_land_chances, weights=[1, 2], k = 1)[0]
+                        
+                else:
+                    input("Orc misses its attack")
+                        
+                    enemy_land_chances = ["hits", "misses"]
+                    enemy_land_hero = random.choices(enemy_land_chances, weights=[1, 2], k = 1)[0]
     
     print(f"__________________________________")
+    print("---------YOU WON THE FIGHT---------")
     print(f"You currently have {hero.health}hp")
     print(f"__________________________________")
 
@@ -175,7 +228,7 @@ def enemy_fight_start(hero):
 def main():
 
 
-    character_health = 0
+    
 
     maincharacter = [
                 CharacterClasses("Mage", 5, 30), #elf
