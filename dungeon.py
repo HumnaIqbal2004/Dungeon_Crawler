@@ -99,7 +99,7 @@ def fountain(hero, max_health):
     else:
         print("Your will strengthens")
 
-    input("As you walk away the silence on the dungeon returns....")
+    input("As you walk away the silence of the dungeon returns....")
 
 def enemy_fight_start(hero):
     enemies = [
@@ -305,11 +305,12 @@ def main():
 
     while hero.health > 0:
 
-        print(adventure.continue_forward(hero, max_health))
+        (adventure.continue_forward(hero, max_health))
 
     
 
-    
+#need to add the finishing code
+#Hero Descends deeper -game ends-     
     
             
 
