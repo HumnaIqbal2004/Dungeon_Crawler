@@ -67,25 +67,39 @@ class Styles:
     """
 
 class adventure:
-    def continue_forward(hero):
+    def continue_forward(hero, max_health):
                 
-            encounters = ["chest", "enemy", "hall"]
+            encounters = ["fountain of healing", "enemy", "hall"]
     
             encounter = random.choices(encounters, weights=[2, 1, 4], k = 1)[0]
             if encounter == "hall":
                 input("As you go deeper into the dungeon you notice something!")
                 print("More walls..")
     
-            if encounter == "chest":
+            if encounter == "fountain of healing":
                 input("As you go deeper into the dungeon you notice something!")
-                print("You see a chest")
+                print("A magical fountain🌿💦")
+                fountain(hero, max_health)
     
             if encounter == "enemy":
                 print("You encounter an enemy")
                 enemy_fight_start(hero)
 
 
+def fountain(hero, max_health):
+    input("You approach the fountain")
+    input("For a second the eery silence of the dungeon disappears")
+    input("The water draws you close")
+    input("You drink out of the fountain")
 
+    if hero.health < max_health:
+        print("You feel your injuries heal")
+        print(f"You health is back to {max_health}")
+
+    else:
+        print("Your will strengthens")
+
+    input("As you walk away the silence on the dungeon returns....")
 
 def enemy_fight_start(hero):
     enemies = [
@@ -256,6 +270,7 @@ def main():
             print(CharacterClasses.get_summary(maincharacter[0]))
             chracter_selection_page = False
             hero = maincharacter[0]
+            max_health = 30
             
             print(f"You current health is {hero.health}")
             
@@ -263,6 +278,7 @@ def main():
             print(CharacterClasses.get_summary(maincharacter[1]))
             chracter_selection_page = False
             hero = maincharacter[1]
+            max_health = 40
                         
             print(f"You current health is {hero.health}")
 
@@ -270,6 +286,7 @@ def main():
             print(CharacterClasses.get_summary(maincharacter[2]))
             chracter_selection_page = False
             hero = maincharacter[2]
+            max_health = 25
                         
             print(f"You current health is {hero.health}")
 
@@ -288,7 +305,7 @@ def main():
 
     while hero.health > 0:
 
-        print(adventure.continue_forward(hero))
+        print(adventure.continue_forward(hero, max_health))
 
     
 
