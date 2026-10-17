@@ -67,7 +67,7 @@ class Styles:
     """
 
 class adventure:
-    def continue_forward():
+    def continue_forward(hero):
                 
             encounters = ["chest", "enemy", "hall"]
     
@@ -82,22 +82,95 @@ class adventure:
     
             if encounter == "enemy":
                 print("You encounter an enemy")
-                enemy_fight_start()
+                enemy_fight_start(hero)
 
-def enemy_fight_start():
+
+
+
+def enemy_fight_start(hero):
     enemies = [
                 EnemyClasses("Goblin", 3, 10),
                 EnemyClasses("Orc", 5, 20)
             ]
 
+    
+
     which_enemies = ["Goblin", "Orc"]
     which_enemy = random.choices(which_enemies, weights=[3, 1], k = 1)[0]
 
+    
+
+    character_land_chances = ["hits", "misses"]
+    character_land_goblin = random.choices(character_land_chances, weights = [3, 1], k = 1)[0]
+
+    enemy_land_chances = ["hits", "misses"]
+    enemy_land_hero = random.choices(enemy_land_chances, weights=[1, 2], k = 1)[0]
+
+    
+    
+    
     if which_enemy == "Goblin":
         print(EnemyClasses.enemy_summary(enemies[0]))
+        goblin = enemies[0]
+
+
+        while hero.health > 0 and goblin.health > 0:
+
+            if character_land_goblin == "hits":
+                input(f"You hit goblin for {hero.attack_power} points of damage")
+                goblin.health = goblin.health - hero.attack_power
+                input(f"Goblin has {goblin.health}hp!")
+                if goblin.health <= 0:
+                    print("Goblin faints")
+                    break
+
+                character_land_chances = ["hits", "misses"]
+                character_land_goblin = random.choices(character_land_chances, weights = [3, 1], k = 1)[0]
+                
+
+                if enemy_land_hero == "hits":
+                    input(f"Goblin hits you for {goblin.attack_power} points of damage")
+                    hero.health = hero.health - goblin.attack_power
+                    input(f"Your {hero.type} currently has {hero.health}hp")
+                    if hero.health <= 0:
+                        #ADD A DIED FUNCTION
+                        break
+
+                    enemy_land_chances = ["hits", "misses"]
+                    enemy_land_hero = random.choices(enemy_land_chances, weights=[1, 2], k = 1)[0]
+
+                else:
+                    input("Goblin misses its attack")
+
+                    enemy_land_chances = ["hits", "misses"]
+                    enemy_land_hero = random.choices(enemy_land_chances, weights=[1, 2], k = 1)[0]
+
+            else:
+                input(f"You miss")
+                character_land_chances = ["hits", "misses"]
+                character_land_goblin = random.choices(character_land_chances, weights = [3, 1], k = 1)[0]
+
+                if enemy_land_hero == "hits":
+                    input(f"Goblin hits you for {goblin.attack_power} points of damage")
+                    hero.health = hero.health - goblin.attack_power
+                    input(f"Your {hero.type} currently has {hero.health}hp")
+                
+                    enemy_land_chances = ["hits", "misses"]
+                    enemy_land_hero = random.choices(enemy_land_chances, weights=[1, 2], k = 1)[0]
+                
+                else:
+                    input("Goblin misses its attack")
+                
+                    enemy_land_chances = ["hits", "misses"]
+                    enemy_land_hero = random.choices(enemy_land_chances, weights=[1, 2], k = 1)[0]     
 
     elif which_enemy == "Orc":
         print(EnemyClasses.enemy_summary(enemies[1]))
+    
+    print(f"__________________________________")
+    print(f"You currently have {hero.health}hp")
+    print(f"__________________________________")
+
 
 def main():
 
@@ -129,34 +202,40 @@ def main():
         if race_selection == 'mage':
             print(CharacterClasses.get_summary(maincharacter[0]))
             chracter_selection_page = False
-            character_health = maincharacter[0].health
+            hero = maincharacter[0]
             
-            print(f"You current health is {character_health}")
+            print(f"You current health is {hero.health}")
             
         elif race_selection == 'warrior':
             print(CharacterClasses.get_summary(maincharacter[1]))
             chracter_selection_page = False
-            character_health = maincharacter[1].health
+            hero = maincharacter[1]
                         
-            print(f"You current health is {character_health}")
+            print(f"You current health is {hero.health}")
 
         elif race_selection == 'assassin':
             print(CharacterClasses.get_summary(maincharacter[2]))
             chracter_selection_page = False
-            character_health = maincharacter[2].health
+            hero = maincharacter[2]
                         
-            print(f"You current health is {character_health}")
+            print(f"You current health is {hero.health}")
 
         else:
             print("Wrong input!!")
 
-    while character_health > 0:
 
-        input("You enter the dungeon")
+        input(f"Your {hero.type} enters the dungeon")
+
+        
         input("Theres a chill in the air")
         input("You feel on edge")
 
-        print(adventure.continue_forward())
+
+    
+
+    while hero.health > 0:
+
+        print(adventure.continue_forward(hero))
 
     
 
